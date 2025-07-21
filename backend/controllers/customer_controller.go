@@ -126,3 +126,24 @@ func DeleteCustomer(w http.ResponseWriter, r *http.Request) {
 	}
 	utils.SendJSONResponse(w, http.StatusOK, response)
 }
+
+func GetCustomerByTelNo(w http.ResponseWriter, r *http.Request) {
+	telNo := mux.Vars(r)["telno"]
+
+	var customer models.Customer
+	result := db.Where("tel_no = ?", telNo).First(&customer)
+	if result.Error != nil {
+		utils.SendJSONResponse(w, http.StatusNotFound, utils.APIResponse{
+			Success: false,
+			Message: "Customer not found",
+		})
+		return
+	}
+
+	response := utils.APIResponse{
+		Success: true,
+		Message: "Customer retrieved successfully",
+		Data:    customer,
+	}
+	utils.SendJSONResponse(w, http.StatusOK, response)
+}

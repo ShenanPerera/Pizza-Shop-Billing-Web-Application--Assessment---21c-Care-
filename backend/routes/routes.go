@@ -15,6 +15,7 @@ func SetupRoutes() *mux.Router {
 
 	// Customer routes
 	api.HandleFunc("/customers", controllers.GetCustomers).Methods("GET")
+	api.HandleFunc("/customers/telno/{telno}", controllers.GetCustomerByTelNo).Methods("GET")
 	api.HandleFunc("/customers/{id:[0-9]+}", controllers.GetCustomerByID).Methods("GET")
 	api.HandleFunc("/customers", controllers.CreateCustomer).Methods("POST")
 	api.HandleFunc("/customers/{id:[0-9]+}", controllers.UpdateCustomer).Methods("PUT")
