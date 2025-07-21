@@ -243,6 +243,7 @@ func GetPizzaByID(w http.ResponseWriter, r *http.Request) {
 		Message: "Pizza retrieved successfully",
 		Data:    pizza,
 	}
+	log.Printf("Pizza retrieved: %+v", response.Data)
 	utils.SendJSONResponse(w, http.StatusOK, response)
 }
 
